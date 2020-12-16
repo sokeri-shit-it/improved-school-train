@@ -1,0 +1,121 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <main>
+        <br> <br>
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="jumbotron">
+                <h1 class="display-4">Добро пожаловать на сайт<p class="font-weight-bold">Khab Express</p></h1>
+                <br>
+                <p class="lead font-weight-normal">Здесь вы можете отправить посылку на территории всего Дальнего
+                    Востока.</p>
+                <hr class="my-4">
+                <p>На этом сайте вы можете найти много машин для отправки своих грузов</p><br>
+                <a class="btn btn-dark btn-lg" href="{% url 'about' %}" role="button">Узнать больше</a>
+            </div>
+        </div>
+        <h1>Auto list</h1>
+        <br>
+        <hr>
+        <br>
+        <ul class="list-unstyled">
+            <li class="media">
+                <img class="mr-3 rounded border border-secondary" src=
+                        "{% static 'media/images/iveco_stralis_hi_way.jpg' %}" alt="Auto" width="12%">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1">Iveco Strails Hi Way</h5><hr>
+                    Объем прицепа: до 85 м. куб.
+                </div>
+            </li><br>
+            <li class="media my-4">
+                <img class="mr-3 rounded border border-secondary" src=
+                        "{% static 'media/images/man f2000.jpg' %}" alt="Auto" width="12%">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1 font-weight-bold">MAN F2000</h5><hr>
+                    Объем прицепа: до 90 м. куб.
+                </div>
+            </li><br>
+            <li class="media">
+                <img class="mr-3 rounded border border-secondary" src=
+                        "{% static 'media/images/mercedes-benz-actros-1844.jpg' %}" alt="Auto" width="12%">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1 font-weight-bold">Mersedes Benz Actors 1844</h5><hr>
+                    Объем прицепа: до 80 м. куб.
+                </div>
+            </li>
+            <br><br>
+            <li class="media">
+                <img class="mr-3 rounded border border-secondary" src=
+                        "{% static 'media/images/mersedes-benz actros 2019.jpg' %}" alt="Auto" width="12%">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1 font-weight-bold">Mersedes Benz Actors 2019</h5><hr>
+                    Объем прицепа: до 85 м. куб.
+                </div>
+            </li>
+            <br><br>
+            <li class="media">
+                <img class="mr-3 rounded border border-secondary" src=
+                        "{% static 'media/images/reno t460.jpg' %}" alt="Auto" width="12%">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1 font-weight-bold">Reno T460</h5><hr>
+                    Объем прицепа: до 80 м. куб.
+                </div>
+            </li>
+            <br><br>
+            <li class="media">
+                <img class="mr-3 rounded border border-secondary" src=
+                        "{% static 'media/images/scania r730.jpg' %}" alt="Auto" width="12%">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1 font-weight-bold">Scania R730</h5><hr>
+                    Объем прицепа: до 90 м. куб.
+                </div>
+            </li><br><br>
+            <li class="media">
+                <img class="mr-3 rounded border border-secondary" src=
+                        "{% static 'media/images/volvo fmx.jpg' %}" alt="Auto" width="12%" >
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1 font-weight-bold">Volvo FMX</h5><hr>
+                    Объем прицепа: до 75 м. куб.
+                </div>
+            </li>
+        </ul>
+        <br>
+        <hr>
+        <br>
+        <h1>News</h1>
+        <br>
+        <hr>
+        <br>
+        <div class="card text-center">
+            <div class="card-header">
+                Featured
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+        </div>
+        <br>
+        <div class="card text-center">
+            <div class="card-header">
+                Featured
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <h1>Calculator</h1>
+
+    </main>
+    <br>
+
+{% endblock %}

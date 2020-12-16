@@ -1,0 +1,167 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Форма</h2>
+        </div>
+
+            <div class="row">
+                <div class="col-md-4 order-md-2 mb-4">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Подписка</span>
+                        <span class="badge badge-secondary badge-pill">3</span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Название подписки</h6>
+                                <small class="text-muted">Описание</small>
+                            </div>
+                            <span class="text-muted">Стоимость</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Что-то еще</h6>
+                                <small class="text-muted">Описание</small>
+                            </div>
+                            <span class="text-muted">Стоимость</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Что-то еще</h6>
+                                <small class="text-muted">Описание</small>
+                            </div>
+                            <span class="text-muted">Стоимость</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-success">
+                                <h6 class="my-0">Промо код</h6>
+                                <small>Название промо кода</small>
+                            </div>
+                            <span class="text-success">Скидка</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Всего (Валюта)</span>
+                            <strong>Стоимость</strong>
+                        </li>
+                    </ul>
+
+                    <form class="card p-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Промо код">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-secondary">Активировать</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">Регистрация</h4>
+                <form class="needs-validation was-validated" novalidate="">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">Имя</label>
+                            <input type="text" class="form-control" id="Имя" placeholder="" value="" required="">
+                            <div class="invalid-feedback">
+                                Это обязательное поле.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Last name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                            <div class="invalid-feedback">
+                                Это обязательное поле.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="username">Имя пользователя</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@</span>
+                            </div>
+                            <input type="text" class="form-control" id="username" placeholder="Username" required="">
+                            <div class="invalid-feedback" style="width: 100%;">
+                                Это обязательное поле.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email">Email <span class="text-muted">(Необязательно)</span></label>
+                        <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                        <div class="invalid-feedback">
+                            Please enter a valid email address for shipping updates.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="country">Страна</label>
+                            <select class="custom-select d-block w-100" id="country" required="">
+                                <option value="">Выберете...</option>
+                                <option>Россия</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Выберете страну из списка.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="state">Город</label>
+                            <select class="custom-select d-block w-100" id="state" required="">
+                                <option value="">Выберете...</option>
+                                <option>Москва</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Выберете город из списка.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="zip">Почтовый индекс</label>
+                            <input type="text" class="form-control" id="zip" placeholder="" required="">
+                            <div class="invalid-feedback">
+                                Введите правильный почтовый индекс.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Закончить регистрацию</button>
+                </form>
+            </div>
+        </div>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">© 2020 Родные</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Конфиденциальность</a></li>
+                <li class="list-inline-item"><a href="#">Условия</a></li>
+                <li class="list-inline-item"><a href="#">Поддержка</a></li>
+            </ul>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="/docs/4.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP"
+            crossorigin="anonymous"></script>
+    <script src="form-validation.js"></script>
+
+
+{% endblock %}

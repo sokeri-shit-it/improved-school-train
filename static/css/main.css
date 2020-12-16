@@ -1,0 +1,32 @@
+.h1_n {
+    float: left;
+}
+
+.h1_p {
+    float: right;
+}
+
+.container {
+    width: 100%;
+}
+
+.info {
+    border: black 5px;
+}
+
+.com_name {
+    text-align: center;
+    font: 200% Berlin Sans FB Demi;
+}
+
+@font-face {
+    font-family: 'cool';
+    src: url('../fonts/20008.ttf');
+    src: local('../fonts/20008.ttf')
+}
+
+.up_btn {
+    border:  2px solid;
+    border-radius: 100px;
+    background-color: white;
+}
