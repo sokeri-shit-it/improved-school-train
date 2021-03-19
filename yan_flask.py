@@ -3,6 +3,7 @@ from flask import render_template
 import jinja2
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 @app.route('/index_khab')

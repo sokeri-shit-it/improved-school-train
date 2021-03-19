@@ -14,39 +14,38 @@
 <nav class="navbar navbar-expand-lg navbar-primary bg-primary border-bottom border-primary">
     <nav class="navbar navbar-white bg-primary">
         <span class="border border-light rounded">
-            <img src="{{ url_for('static', filename='img/logo_1.png') }}" alt="" width="125"
-             height="55">
+            <img src="static/img/logo_1" alt="" width="125" height="55">
         </span>
     </nav>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <nav class="navbar navbar-white bg-primary">
             <form class="form-inline">
-                <a href="/index_khab">
+                <a href="index.html">
                     <button class="btn btn-outline-light" type="button">Главная</button>
                 </a>
             </form>
         </nav>
         <nav class="navbar navbar-white bg-primary">
             <form class="form-inline">
-                <a href="/about-us">
+                <a href="about-us.html">
                     <button class="btn btn-outline-light" type="button">Про нас</button>
                 </a>
             </form>
         </nav>
     </div>
-    <a class="btn btn-outline-light" href="/map">Наши офисы</a>
+    <a class="btn btn-outline-light" href="map.html">Наши офисы</a>
 </nav>
 
 <div>
     <main>
         <div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-primary">
-        <img src="static/img/delivery.png" class="rounded float-right" alt="..." width="400" height="400">
+        <img src="static/img/delivery.png" class="rounded float-right" alt="...">
             <div class="col-md-5 p-lg-5 mx-right my-5 text-light">
               <h1 class="display-4 fw-normal text-bold">KHAB EXPRESS</h1><br>
               <p class="lead fw-norma text-boldl">KHAB EXPRESS - сервис №1 на всей территории Дальнего Востока.
               Мы доставляем посылки быстро и качественно.</p><br>
-              <a class="btn btn-outline-light" href="/about-us">Узнать больше
+              <a class="btn btn-outline-light" href="about-us.html">Узнать больше
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
                   <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
@@ -144,7 +143,7 @@
               <p class="card-text">Теперь мы доставляем посылки не только по территории Хабаровского края, но и всего Дальнего Востока</p>
             </div>
             <div class="card-footer border-light bg-primary">
-              <small class="text-light">Последнее обновление вчера</small>
+              <small class="text-light">Последнее обновление сегодня</small>
             </div>
           </div>
           <div class="card shadow-lg">
@@ -154,7 +153,7 @@
               <p class="card-text">В этом году у нас более чем грандиозные планы! Мы откроем еще 5 новых офисов KHAB EXPRESS на территории Дальнего Востока.</p>
             </div>
             <div class="card-footer border-light bg-primary">
-              <small class="text-light">Последнее обновление вчера</small>
+              <small class="text-light">Последнее обновление сегодня</small>
             </div>
           </div>
           <div class="card shadow-lg">
@@ -165,7 +164,7 @@
               при оформлении заказа (промокод на скидку высылается на почту при регистрации).</p>
             </div>
             <div class="card-footer border-light bg-primary">
-              <small class="text-light">Последнее обновление вчера</small>
+              <small class="text-light">Последнее обновление сегодня</small>
             </div>
           </div>
         </div>
@@ -291,7 +290,7 @@
           </div>
           <div class="col-md-3">
             <label for="validationDefault04" class="form-label">По сохраности</label>
-            <select class="form-select form-select-lg g-3 rounded " aria-label=".form-select-lg example" style="width: 200px; height: 40px" id="validationDefault04" required>
+            <select class="form-select form-select-lg g-3 rounded bg-white" aria-label=".form-select-lg example" style="width: 200px; height: 40px" id="validationDefault04" required>
             <option selected>Обычная посылка</option>
             <option value="1">Хрупкая</option>
             </select>
