@@ -1,14 +1,17 @@
 from flask import Flask
-from flask import render_template
+from flask import render_template, request, redirect
 import jinja2
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
-@app.route('/index_khab')
+@app.route('/index_khab', methods=['GET', 'POST'])
 def index_khab():
-    return render_template('index.html')
+    if request.method == 'GET':
+        return render_template('index.html')
+    elif request.method == 'POST':
+        return redirect('/index')
 
 
 @app.route('/about_us')
