@@ -1,56 +1,18 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}?20201029">
-    <link rel="shortcut icon" href="media/only_logo.png" type="image/png">
-    <title>Про нас</title>
+{% extends 'base.html' %}
 
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-primary bg-primary border-bottom border-primary">
-    <nav class="navbar navbar-white bg-primary">
-        <span class="border border-light rounded">
-            <img src="media/logo_1.png" alt="" width="125"
-             height="55">
-        </span>
-    </nav>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <nav class="navbar navbar-white bg-primary">
-            <form class="form-inline">
-                <a href="index.html">
-                    <button class="btn btn-outline-light" type="button">Главная</button>
-                </a>
-            </form>
-        </nav>
-        <nav class="navbar navbar-white bg-primary">
-            <form class="form-inline">
-                <a href="about-us.html">
-                    <button class="btn btn-outline-light" type="button">Про нас</button>
-                </a>
-            </form>
-        </nav>
-    </div>
-    <a class="btn btn-outline-light" href="map.html">Наши офисы</a>
-</nav>
-
-<div>
+{% block head %}
     <div class="position-relative overflow-hidden p-3 p-md-5 bg-primary">
-            <img src="media/reno t460.jpg" class="rounded float-right shadow-lg" alt="..." wight="300px" height="400px">
+            <img src="static/img/reno t460.jpg" class="rounded float-right shadow-lg" alt="..." wight="300px" height="400px">
             <div class="col-md-5 p-lg-5 my-4 mx-left text-light text-start">
               <h2 class="fs-normal">Решения для практически бесконечного числа потребностей в логистике</h2><br>
               <p class="lead fw-normal">KHAB EXPRESS предоставляет возможность быстрой доставки груза или документов по всей территории Дальнего Востока. Наши офисы расположены более чем в 100 городах региона.</p>
             </div>
+        </div>
 
-</div>
+{% endblock %}
 
-<div class="container">
-        <br><br><br>
+{% block content %}
+    <br><br><br>
     <div class="shadow-sm p-3 mb-5 bg-white rounded">
         <div class="row featurette">
             <div class="col-md-7">
@@ -60,7 +22,7 @@
                 <p class="lead">У нас в компании раюотают только лучшие сотрудники, которые и помогаю нашей компании расти и развиваться дальше!</p>
             </div>
             <div class="col-md-5">
-                <img class="card-img-top" src="media/store.jpg" alt="Card image cap" width="300" height="300">
+                <img class="card-img-top" src="static/img/store.jpg" alt="Card image cap" width="300" height="300">
             </div>
         </div>
 
@@ -75,13 +37,13 @@
                 Также каждый сторудник раз в год проходит полное медицинское обследование</p>
             </div>
             <div class="col-md-5 order-md-1">
-                <img class="card-img-top" src="media/deivery.jpg" alt="Card image cap" width="300" height="400">
+                <img class="card-img-top" src="static/img/deivery.jpg" alt="Card image cap" width="300" height="400">
             </div>
         </div>
 
         <hr class="featurette-divider">
 
-                <div class="row featurette">
+        <div class="row featurette">
             <div class="col-md-7">
                 <h2 class="featurette-heading bg-primary rounded p-3 text-light">Мы гарантируем качество доставки вашей посылки!
                 </h2>
@@ -90,7 +52,7 @@
                 <a href='map.html   '>Здесь вы можете ознакомиться с расположением наших офисов!</a></p>
             </div>
             <div class="col-md-5 order-md-1">
-                <img class="card-img-top" src="media/deliv.jpg" alt="Card image cap" width="400" height="400">
+                <img class="card-img-top" src="static/img/deliv.jpg" alt="Card image cap" width="400" height="400">
             </div>
         </div>
     </div>
@@ -103,7 +65,6 @@
         <p class="float-right"><a href="#">Back to top</a></p>
         <p>© 2021 KHAB EXPRESS · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
         </footer><br>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -114,5 +75,4 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
