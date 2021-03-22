@@ -7,18 +7,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
-def main():
-    db_session.global_init("db/blogs.db")
-    user = User()
-    user.name = 'User 1'
-    user.about = 'bio about user 1'
-    user.email = 'users@mail.ru'
-    db_sess = db_session.create_session()
-    db_sess.add(user)
-    db_sess.commit()
-    app.run()
-
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -27,6 +15,7 @@ def register():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Пароли не совпадают")
+        db_session.global_init('db/user_info.db')
         db_sess = db_session.create_session()
         if db_sess.query(User).filter(User.email == form.email.data).first():
             return render_template('register.html', title='Регистрация',
