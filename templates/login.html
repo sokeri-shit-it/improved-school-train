@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container"><br>
-        <img class="shadow rounded mx-auto d-block" src="static/img/logo_1.png" alt="Логотип сайта" width="15%"> <br>
+        <img class="shadow rounded mx-auto d-block" src="static/img/logo_1.png" alt="Логотип сайта" width="19%"> <br>
         <h1 class="custom_form">Войти на KHAB EXPRESS</h1><br>
         <form class="login_form" action="" method="post">
             {{ form.hidden_tag() }}
@@ -35,8 +35,8 @@
                 </div>
             {% endfor %}
             </p>
+            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
             <p>{{ form.submit(type="submit", class="btn btn-success") }}</p>
-            <a>{{ form.register(type="submit", class="text-center") }}<a>
             <div>{{ message }}</div>
         </form>
     </div>
