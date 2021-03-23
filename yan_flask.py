@@ -1,10 +1,19 @@
 from flask import Flask, render_template, redirect, request
 from data import db_session
 from data.users import User
-from form.users import RegisterForm
+from form.users import RegisterForm, LoginForm
+from flask_login import LoginManager, login_user
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    db_sess = db_session.create_session()
+    return db_sess.query(User).get(user_id)
 
 
 @app.route('/index_khab', methods=['GET', 'POST'])
@@ -12,7 +21,7 @@ def index_khab():
     if request.method == 'GET':
         return render_template('index.html')
     elif request.method == 'POST':
-        return redirect('/index')
+        return redirect('/index_khab')
 
 
 @app.route('/about_us')
@@ -53,7 +62,19 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    pass
+    form = LoginForm()
+    if form.register:
+        redirect('/register')
+    if form.validate_on_submit():
+        db_session.global_init('db/user_info.db')
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.name == form.name.data).first()
+        if user and user.check_password(form.password.data):
+            return redirect("/index_khab")
+        return render_template('login.html',
+                               message="Неправильный логин или пароль",
+                               form=form)
+    return render_template('login.html', title='Авторизация', form=form)
 
 
 if __name__ == '__main__':
