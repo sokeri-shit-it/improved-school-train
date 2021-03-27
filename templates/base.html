@@ -43,21 +43,41 @@
 		                </a>
 		            </form>
 		        </nav>
+		        {% if current_user.is_authenticated %}
+			        <nav class="navbar navbar-white bg-primary">
+			            <form class="form-inline">
+							<button class="btn btn-outline-light text-decoration-underline" type="button">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
+								class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+	  							<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+								</svg>
+								{{ current_user.city }}
+							</button>
+			            </form>
+			        </nav>
+		        {% endif %}
 		    </div>
 		    {% if current_user.is_authenticated %}
-		    	<a class="btn btn-outline-light" href="/logout">{{ current_user.name }}</a>
+			    <div class="btn-group dropleft">
+				  <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+				    {{ current_user.name }}
+				  </button>
+				  <ul class="dropdown-menu">
+				    <li><a class="dropdown-item" href="/profile">Личный кабинет</a></li>
+				    <li><a class="dropdown-item" href="/settings">Настройки профиля</a></li>
+				    <li><a class="dropdown-item" href="/logout">Выйти</a></li>
+				  </ul>
+				</div>
 		    {% else %}
-		    <!-- Default dropleft button -->
-			<div class="btn-group dropleft">
-			  <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-			    Dropstart
-			  </button>
-			  <ul class="dropdown-menu">
-			    <li><a class="dropdown-item" href="/login">Войти</a></li>
-			    <li><a class="dropdown-item" href="/register">Зарегистрировать  ся</a></li>
-			    <li><a class="dropdown-item" href="/settings">Настройки</a></li>
-			  </ul>
-			</div>
+				<div class="btn-group dropleft">
+				  <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+				    Войти
+				  </button>
+				  <ul class="dropdown-menu">
+				    <li><a class="dropdown-item" href="/login">Войти</a></li>
+				    <li><a class="dropdown-item" href="/register">Зарегистрироваться</a></li>
+				  </ul>
+				</div>
 		   	{% endif %}
 		</nav>
 
