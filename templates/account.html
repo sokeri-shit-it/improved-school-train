@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<div class="all_content">
+		<div class="user_avatar">
+			<img class="avatar_img" src="static/img/default_avatar.png">
+			<p class="avatar_text">{{ current_user.name }}</p>
+			<button type="button" class="btn btn-light avatar_button">Изменить профиль</button>
+		</div>
+
+		<div class="profile_content">
+			<h1>Профиль</h1><hr><br>
+			<h2>Ваши заказы</h2><br>
+			<!-- Здесь будет код для поля ввода номера заказа -->
+			<p>
+				В данное поле вы можете ввести номер своего заказа, чтобы посмотреть где находиться ваш товар, а также его статус (в пути, заказ прибыл в пункт выдачи и т.д.)
+			</p><hr><br>
+			<h2>Ваш купон на скидку при получении</h2>
+			<p>Код купона будет меняться после того как вы его применили</p>
+			<!-- Дальше будет фото купона или что то в этом роде -->
+		</div>
+	</div>
+{% endblock %}

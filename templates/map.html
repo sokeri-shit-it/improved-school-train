@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+    Карта городов KHAB EXPRESS
+{% endblock %}
+
+{% block content %}
+    <br><h1 class="text-light text-center bg-primary rounded p-3 shadow-lg mr-5 ml-5">Карта</h1><br>
+    <p class="text-center">На карте отмечены города в которых есть наши офисы.</p><hr><br>
+    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A8c7d425cb0e8633fcc68c05cdcbc9b3706ab12c3985215f05a22793bd52cad07&amp;source=constructor" width="1162" height="720" frameborder="0"></iframe>
+
+    <!-- FOOTER -->
+        <br><hr><br>
+        <footer class="container">
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>© 2021 KHAB EXPRESS · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+        </footer><br>
+{% endblock %}

@@ -1,0 +1,282 @@
+{% extends 'base.html' %}
+{% block title %}
+    Главная страница KHAB EXPRESS
+{% endblock %}
+
+{% block head %}
+        <main>
+            <div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-primary">
+            <img src="static/img/delivery.png" class="rounded float-right" alt="...">
+                <div class="col-md-5 p-lg-5 mx-right my-5 text-light">
+                  <h1 class="display-4 fw-normal text-bold">KHAB EXPRESS</h1><br>
+                  <p class="lead fw-norma text-boldl">KHAB EXPRESS - сервис №1 на всей территории Дальнего Востока.
+                  Мы доставляем посылки быстро и качественно.</p><br>
+                  <a class="btn btn-outline-light" href="/about_us">Узнать больше
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                      <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                </svg></a>
+                </div>
+                <div class="product-device shadow-sm d-none d-md-block"></div>
+                <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+            </div>
+
+        </main>
+    </div>
+{% endblock %}
+
+{% block content %}
+        <main>
+            <br> <br>
+            <h1 class="text-light text-center bg-primary rounded p-3 shadow-lg mr-5 ml-5">Каталог Авто</h1><br>
+            <br>
+            <p class="text-center">Здесь вы можете посмотреть какие машины доставляют грузы.</p>
+            <hr>
+            <br>
+            <ul class="list-unstyled">
+                    <li class="media">
+                        <img class="shadow mr-5 rounded"
+                            src="static/img/iveco_stralis_hi_way.jpg" alt="Auto" width="17%">
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1 font-weight-bold">Iveco Strails Hi Way</h5><hr>
+                            Объем прицепа: до 85 м. куб.
+                        </div>
+                    </li><br>
+                <li class="media my-4">
+                    <img class="shadow mr-5 rounded"
+                        src="static/img/man f2000.jpg" alt="Auto" width="17%">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1 font-weight-bold">MAN F2000</h5><hr>
+                        Объем прицепа: до 90 м. куб.
+                    </div>
+                </li><br>
+                <li class="media">
+                    <img class="shadow mr-5 rounded"
+                        src="static/img/mercedes-benz-actros-1844.jpg" alt="Auto" width="17%">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1 font-weight-bold">Mersedes Benz Actors 1844</h5><hr>
+                        Объем прицепа: до 80 м. куб.
+                    </div>
+                </li>
+                <br><br>
+                <li class="media">
+                    <img class="shadow mr-5 rounded"
+                        src="static/img/mersedes-benz actros 2019.jpg" alt="Auto" width="17%">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1 font-weight-bold">Mersedes Benz Actors 2019</h5><hr>
+                        Объем прицепа: до 85 м. куб.
+                    </div>
+                </li>
+                <br><br>
+                <li class="media">
+                    <img class="shadow mr-5 rounded"
+                        src="static/img/reno t460.jpg" alt="Auto" width="17%">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1 font-weight-bold">Reno T460</h5><hr>
+                        Объем прицепа: до 80 м. куб.
+                    </div>
+                </li>
+                <br><br>
+                <li class="media">
+                    <img class="shadow mr-5 rounded"
+                        src="static/img/scania r730.jpg" alt="Auto" width="17%">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1 font-weight-bold">Scania R730</h5><hr>
+                        Объем прицепа: до 90 м. куб.
+                    </div>
+                </li><br><br>
+                <li class="media">
+                    <img class="shadow border-light mr-5 rounded"
+                        src="static/img/volvo fmx.jpg" alt="Auto" width="17%" >
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1 font-weight-bold">Volvo FMX</h5><hr>
+                        Объем прицепа: до 75 м. куб.
+                    </div>
+                </li>
+            </ul>
+            <br>
+            <hr>
+            <br><br><br><br>
+            <h1 class="text-light text-center bg-primary rounded p-3 shadow-lg mr-5 ml-5">Новости</h1>
+            <br>
+            <hr>
+            <br>
+            <div class="card-deck">
+              <div class="card shadow-lg">
+                <img class="card-img-top" src="static/img/ДВ.png" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">У нас хорошие новости!</h5>
+                  <p class="card-text">Теперь мы доставляем посылки не только по территории Хабаровского края, но и всего Дальнего Востока</p>
+                </div>
+                <div class="card-footer border-light bg-primary">
+                  <small class="text-light">Последнее обновление сегодня</small>
+                </div>
+              </div>
+              <div class="card shadow-lg">
+                <img class="card-img-top" src="static/img/сделка.png" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Большие перемены!</h5>
+                  <p class="card-text">В этом году у нас более чем грандиозные планы! Мы откроем еще 5 новых офисов KHAB EXPRESS на территории Дальнего Востока.</p>
+                </div>
+                <div class="card-footer border-light bg-primary">
+                  <small class="text-light">Последнее обновление сегодня</small>
+                </div>
+              </div>
+              <div class="card shadow-lg">
+                <img class="card-img-top" src="static/img/sale.png" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Все для новых клиентов!</h5>
+                  <p class="card-text">Каждому новому клиету мы даем скидку 20% на отпраку любого вида посылок. Для получения скидки введите промокод в специальное поле
+                  при оформлении заказа (промокод на скидку высылается на почту при регистрации).</p>
+                </div>
+                <div class="card-footer border-light bg-primary">
+                  <small class="text-light">Последнее обновление сегодня</small>
+                </div>
+              </div>
+            </div>
+            <br>
+            <hr>
+            <br><br><br><br>
+            <h1 class="text-light text-center bg-primary rounded p-3 shadow-lg mr-5 ml-5">Калькулятор</h1><br>
+
+            <form class="row g-3">
+              <div class="col-md-6">
+                <label for="validationDefault01" class="form-label">Город отправки</label>
+                <input class="form-control float-right" list="datalistOptions" id="exampleDataList" placeholder="Введите навание города...">
+                <datalist id="datalistOptions">
+                    <option value="Гусиноозёрск">
+                    <option value="Кяхта">
+                    <option value="Северобайкальск">
+                    <option value="Борзя">
+                    <option value="Краснокаменск">
+                    <option value="Холмск">
+                    <option value="Фокино">
+                    <option value="Уссурийск">
+                    <option value="Тында">
+                    <option value="Спасск-Дальний">
+                    <option value="Советская Гавань">
+                    <option value="Свободный">
+                    <option value="Партизанск">
+                    <option value="Оха">
+                    <option value="Нерюнгри">
+                    <option value="Находка">
+                    <option value="Мирный">
+                    <option value="Лесозаводск">
+                    <option value="Ленск">
+                    <option value="Корсаков">
+                    <option value="Зея">
+                    <option value="Елизово">
+                    <option value="Дальнереченск">
+                    <option value="Дальнегорск">
+                    <option value="Вилючинск">
+                    <option value="Большой Камень">
+                    <option value="Белогорск">
+                    <option value="Артём">
+                    <option value="Арсеньев">
+                    <option value="Белогорск">
+                    <option value="Амурск">
+                    <option value="Алдан">
+                    <option value="Благовещенск">
+                    <option value="Владивосток">
+                    <option value="Биробиджан">
+                    <option value="Южно-Сахалинск">
+                    <option value="Петропавловск-Камчатский">
+                    <option value="Анадырь">
+                    <option value="Магадан">
+                    <option value="Улан-Удэ">
+                    <option value="Чита">
+                    <option value="Якутск">
+                    <option value="Комсомольск-на-Амуре">
+                    <option value="Хабаровск">
+                </datalist>
+              </div>
+              <div class="col-md-3">
+                <label for="validationDefault02" class="form-label">Тип посылки</label>
+                <select class="form-select form-select-lg g-3 rounded" style="width: 200px; height: 40px" id="validationDefault02">
+                <option selected>Письмо/документ</option>
+                <option value="1">Почтовая карточка/открытка</option>
+                <option value="1">Бандероль</option>
+                <option value="1">Посылка</option>
+                <option value="1">Документ</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="validationDefault05" class="form-label">Почтовый адрес</label>
+                <input type="text" class="form-control" id="validationDefault05" required>
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefault03" class="form-label">Город доставки</label>
+                <input class="form-control float-right" list="datalistOptions" id="exampleDataList" placeholder="Введите навание города...">
+                <datalist id="datalistOptions">
+                    <option value="Гусиноозёрск">
+                    <option value="Кяхта">
+                    <option value="Северобайкальск">
+                    <option value="Борзя">
+                    <option value="Краснокаменск">
+                    <option value="Холмск">
+                    <option value="Фокино">
+                    <option value="Уссурийск">
+                    <option value="Тында">
+                    <option value="Спасск-Дальний">
+                    <option value="Советская Гавань">
+                    <option value="Свободный">
+                    <option value="Партизанск">
+                    <option value="Оха">
+                    <option value="Нерюнгри">
+                    <option value="Находка">
+                    <option value="Мирный">
+                    <option value="Лесозаводск">
+                    <option value="Ленск">
+                    <option value="Корсаков">
+                    <option value="Зея">
+                    <option value="Елизово">
+                    <option value="Дальнереченск">
+                    <option value="Дальнегорск">
+                    <option value="Вилючинск">
+                    <option value="Большой Камень">
+                    <option value="Белогорск">
+                    <option value="Артём">
+                    <option value="Арсеньев">
+                    <option value="Белогорск">
+                    <option value="Амурск">
+                    <option value="Алдан">
+                    <option value="Благовещенск">
+                    <option value="Владивосток">
+                    <option value="Биробиджан">
+                    <option value="Южно-Сахалинск">
+                    <option value="Петропавловск-Камчатский">
+                    <option value="Анадырь">
+                    <option value="Магадан">
+                    <option value="Улан-Удэ">
+                    <option value="Чита">
+                    <option value="Якутск">
+                    <option value="Комсомольск-на-Амуре">
+                    <option value="Хабаровск">
+                </datalist>
+              </div>
+              <div class="col-md-3">
+                <label for="validationDefault04" class="form-label">По сохраности</label>
+                <select class="form-select form-select-lg g-3 rounded bg-white" aria-label=".form-select-lg example" style="width: 200px; height: 40px" id="validationDefault04" required>
+                <option selected>Обычная посылка</option>
+                <option value="1">Хрупкая</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="validationDefault05" class="form-label">Почтовый адрес</label>
+                <input type="text" class="form-control" id="validationDefault05" required>
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefault01" class="form-label">Объем посылки</label>
+                <input type="text" class="form-control" id="validationDefault01" placeholder="Введите в куб.м...">
+              </div>
+              <div class="col-md-10 my-3">
+              <button type="button" class="btn btn-primary collapsible">Рассчитать</button>
+              </div>
+            </form><br>
+            <br><hr><br>
+            <footer class="container">
+            <p class="float-right"><a href="#">Back to top</a></p>
+            <p>© 2021 KHAB EXPRESS · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+            </footer><br>
+        </main>
+{% endblock %}
