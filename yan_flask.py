@@ -5,6 +5,7 @@ from form.users import RegisterForm, LoginForm, EditProfileForm
 from flask_login import LoginManager, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 login_manager = LoginManager()
@@ -22,7 +23,7 @@ def load_user(user_id):
 @login_required
 def logout():
     logout_user()
-    return redirect("/index_khab")
+    return redirect('/index_khab')
 
 
 @app.route('/index_khab')
@@ -80,7 +81,7 @@ def login():
         return render_template('login.html',
                                message="Неправильный логин или пароль",
                                form=form)
-    return render_template('login.html', title='Авторизация', form=form)
+    return render_template('login.html', title='Авторизация', form=form)        
 
 
 @app.route('/profile')
@@ -90,8 +91,9 @@ def account():
 
 
 @app.route('/settings', methods=['GET', 'POST'])
-@login_required
-def edit_profile():
+@login_required 
+@login_manager.user_loader
+def edit_profile(user_id):
     form = EditProfileForm()
     db_session.global_init('db/user_info.db')
     db_sess = db_session.create_session()
@@ -105,8 +107,7 @@ def edit_profile():
     elif request.method == 'GET':
         form.username.data = User.name
         form.email.data = User.email
-    return render_template('settings.html', title='Edit Profile',
-                           form=form)
+    return render_template('settings.html', title='Edit Profile', form=form)
 
 
 @app.route('/delivery', methods=['GET', 'POST'])
