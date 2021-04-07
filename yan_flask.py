@@ -107,7 +107,7 @@ def edit_profile():
         form.email.data = User.email
     return render_template('settings.html', title='Edit Profile',
                            form=form)
-
+    
 
 @app.route('/delivery', methods=['GET', 'POST'])
 @login_required
