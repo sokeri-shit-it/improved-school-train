@@ -19,8 +19,6 @@ class User(SqlAlchemyBase, UserMixin):
     created_date = sqlalchemy.Column(sqlalchemy.Date,
                                      default=datetime.date.today())
 
-    news = orm.relation("News", back_populates='user')
-
     @property
     def password(self):
         raise AttributeError('Password is not a readable attribute')
