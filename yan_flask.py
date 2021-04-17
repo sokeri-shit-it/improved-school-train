@@ -1,11 +1,13 @@
 import os
 import sqlalchemy
+import requests
 
 from flask import Flask, render_template, redirect, request
 from data import db_session
 from data.users import User
-from form.users import RegisterForm, LoginForm, EditProfileForm
+from form.users import RegisterForm, LoginForm, EditProfileForm, DeliveryForm, TrackForm
 from flask_login import LoginManager, login_user, logout_user, login_required
+from data.delivery_and_orders import Delivery_and_Orders
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -113,7 +115,7 @@ def edit_profile():
         return redirect('/profile')
     elif request.method == 'GET':
         form.username.data = user.name
-        form.email.data = user.email
+        form.email.data = user.email 
         form.city.data = user.city
     return render_template('settings.html', form=form)
 
@@ -121,17 +123,40 @@ def edit_profile():
 @app.route('/delivery', methods=['GET', 'POST'])
 @login_required
 def delivery():
+    form = DeliveryForm()
     db_session.global_init('db/delivery_and_orders.db')
     db_secc = db_session.create_session()
-    return render_template('delivery.html')
+    if form.validate_on_submit():
+        print('db')
+        return redirect('/profile')
+        db_secc.commit()
+    return render_template('delivery.html', form=form)
 
 
 @app.route('/track_delivery', methods=['GET', 'POST'], endpoint='track_delivery')
 @login_required
 def track_order():
-    return render_template('track.html')
+    form = TrackForm()
+    db_session.global_init('db/delivery_and_orders.db')
+    db_secc = db_session.create_session()
+    if form.validate_on_submit():
+        map_request = "http://static-maps.yandex.ru/1.x/?ll=37.530887,55.703118&spn=0.002,0.002&l=map"
+        response = requests.get(map_request)
+
+        if not response:
+            print("Ошибка выполнения запроса:")
+            print(map_request)
+            print("Http статус:", response.status_code, "(", response.reason, ")")
+            sys.exit(1)
+
+        map_file = "static/img/map.png"
+        with open(map_file, "wb") as file:
+            file.write(response.content)
+    db_secc.commit()
+    return render_template('track.html', form=form)
 
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
+     

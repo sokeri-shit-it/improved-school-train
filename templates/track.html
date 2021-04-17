@@ -5,6 +5,23 @@
 {% endblock %}
 
 {% block head %}
-    
+<form class="register_form" action="" method="post">
+    <h1>Отследить заказ</h1><br>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.random_order_code.label }}<br>
+        {{ form.random_order_code(class="form-control") }}<br>
+        {% for error in form.random_order_code.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+        {% if form.validate_on_submit() %}
+            <img src="static/img/map.png" alt="" >
+        {% endif %}
+    </p>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    {{message}}
+</form>
 
 {% endblock %}
