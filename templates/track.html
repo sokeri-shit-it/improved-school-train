@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block head %}
-<form class="register_form" action="" method="post">
+<form class="register_form" action="" method="post"><br>
     <h1>Отследить заказ</h1><br>
     {{ form.hidden_tag() }}
     <p>
@@ -15,12 +15,18 @@
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
-        {% endfor %}
+        {% endfor %}<br>
         {% if form.validate_on_submit() %}
-            <img src="static/img/map.png" alt="" >
+            <img src="static/img/map.png" alt="" width="700", height="500"><br><br>
+            <p> Статус: В пути </p> 
+            <p> Адрес доставки: Комсомольская </p>
+            <p class="float-left"> Город отправки: {{ cities.delivery_city }} </p>
+            <p class="float-right"> Город доставки: {{ cities.forwarding_city }} </p>
         {% endif %}
-    </p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    </p>        
+    {% if not form.validate_on_submit() %}
+        <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    {% endif %}
     {{message}}
 </form>
 

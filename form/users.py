@@ -29,16 +29,16 @@ class EditProfileForm(FlaskForm):
 
 
 class DeliveryForm(FlaskForm):
-    username = StringField('Имя отправителя', validators=[DataRequired()])
-    email = StringField('Ваша почта', validators=[DataRequired()])
+    username = StringField('ФИО:', validators=[DataRequired()])
+    email = StringField('Ваша почта (для отправки кода для отслеживания статуса заказа):')
 
-    delivery_city = StringField('Город отправки', validators=[DataRequired()])
-    forwarding_city = StringField('Город доставки', validators=[DataRequired()])
+    delivery_city = StringField('Город отправки:', validators=[DataRequired()])
+    forwarding_city = StringField('Город доставки:', validators=[DataRequired()])
 
-    forwarding_mail_city = IntegerField('Почтовый индекс (города отправки)')
-    delivery_mail_city = IntegerField('Почтовый индекс (города отправки)')
+    forwarding_mail_city = IntegerField('Почтовый индекс (города отправки):', validators=[DataRequired()])
+    delivery_mail_city = IntegerField('Почтовый индекс (города отправки):', validators=[DataRequired()])
     
-    order_message = StringField('Сообщение к заказу')
+    order_message = StringField('Сообщение к заказу:', validators=[DataRequired()])
 
     submit = SubmitField('Сделать заказ')
 

@@ -1,25 +1,56 @@
 import os
-import sqlalchemy
+import sys
+import random
 import requests
+import sqlalchemy
+import smtplib
 
-from flask import Flask, render_template, redirect, request
 from data import db_session
-from data.users import User
-from form.users import RegisterForm, LoginForm, EditProfileForm, DeliveryForm, TrackForm
-from flask_login import LoginManager, login_user, logout_user, login_required
-from data.delivery_and_orders import Delivery_and_Orders
+from threading import Thread
+from flask_mail import Mail, Message
+from flask_script import Manager, Shell
+from data.users import User, Delivery_and_Orders
+from flask import Flask, render_template, redirect, request
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, login_user, logout_user, login_required
+from form.users import RegisterForm, LoginForm, EditProfileForm, DeliveryForm, TrackForm
 
 
 app = Flask(__name__)
+app.config['MAIL_SERVER'] = 'smtp.google.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'khabexpress@gmail.com'
+app.config['MAIL_DEFAULT_SENDER'] = 'khabexpress@gmail.com'
+app.config['MAIL_PASSWORD'] = 'lolo3322'
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+manager = Manager(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
+mail = Mail(app)
+
+
+def shell_context():
+    return dict(app=app, os=os, sys=sys)
+
+manager.add_command('shell', Shell(make_context=shell_context))
+
+
+def async_send_mail(app, message):
+    with app.app_context():
+        mail.send(message)
+
+def send_mail(subject, recipient, template, **kwargs):
+    msg = Message(subject, sender=app.config['MAIL_DEFAULT_SENDER'], recipients=[recipient])
+    msg.html = render_template(template, **kwargs)
+    thr = Thread(target=async_send_mail, args=[app,  msg])
+    thr.start()
+    return thr
 
 
 @login_manager.user_loader
 def load_user(user_id):
-    db_session.global_init('db/user_info.db')
+    db_session.global_init('db/user_info.sqlite')
     db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
 
@@ -54,7 +85,7 @@ def register():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Пароли не совпадают")
-        db_session.global_init('db/user_info.db')
+        db_session.global_init('db/user_info.sqlite')
         db_sess = db_session.create_session()
         if db_sess.query(User).filter(User.email == form.email.data).first():
             return render_template('register.html', title='Регистрация',
@@ -77,9 +108,9 @@ def login():
     form = LoginForm()
     register_form = RegisterForm()
     if form.validate_on_submit():
-        db_session.global_init('db/user_info.db')
+        db_session.global_init('db/user_info.sqlite')
         db_sess = db_session.create_session()
-        user = db_sess.query(User).filter(User.name == form.name.data).first()
+        user = db_sess.query(User).filter(Delivery_and_Orders.random_order_code == form.random_order_code.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=register_form.remember_me.data)
             return redirect("/")
@@ -102,7 +133,7 @@ def account():
 def edit_profile():
     form = EditProfileForm()
     login = LoginForm()
-    db_session.global_init('db/user_info.db')
+    db_session.global_init('db/user_info.sqlite')
     db_sess = db_session.create_session()
     user = db_sess.query(User).order_by(sqlalchemy.desc(User.id)).first()
     print(user.name)
@@ -124,12 +155,29 @@ def edit_profile():
 @login_required
 def delivery():
     form = DeliveryForm()
-    db_session.global_init('db/delivery_and_orders.db')
-    db_secc = db_session.create_session()
+    
     if form.validate_on_submit():
-        print('db')
-        return redirect('/profile')
+        db_session.global_init('db/user_info.sqlite')
+        db_secc = db_session.create_session()
+        
+        order = Delivery_and_Orders(
+            username=form.username.data,
+            delivery_city=form.delivery_city.data,
+            forwarding_city=form.forwarding_city.data,
+            forwarding_mail_adress=form.forwarding_mail_city.data,
+            delivery_mail_adress=form.delivery_mail_city.data,
+            order_message=form.order_message.data,
+            random_order_code=random.randint(1000, 10000)
+        )
+
+        message = Message("Subject", recipients=['levbuzunov@mail.ru'])
+        message.body = "Mail body"
+        message.html = "<p> Mail body </p>"
+        mail.send(message)
+
+        db_secc.add(order)
         db_secc.commit()
+        return redirect('/profile')
     return render_template('delivery.html', form=form)
 
 
@@ -137,11 +185,38 @@ def delivery():
 @login_required
 def track_order():
     form = TrackForm()
-    db_session.global_init('db/delivery_and_orders.db')
+    db_session.global_init('db/user_info.sqlite')
     db_secc = db_session.create_session()
+    cities = db_secc.query(Delivery_and_Orders).filter(Delivery_and_Orders.random_order_code == form.random_order_code.data).first()
     if form.validate_on_submit():
-        map_request = "http://static-maps.yandex.ru/1.x/?ll=37.530887,55.703118&spn=0.002,0.002&l=map"
-        response = requests.get(map_request)
+        os.environ['no_proxy'] = '127.0.0.1,localhost'
+        get_forward_city = f"https://geocode-maps.yandex.ru/1.x/?apikey=40d1649f-0493-4b70-98ba-98533de7710b&geocode={cities.forwarding_city}&format=json"
+        get_delivery_city = f"https://geocode-maps.yandex.ru/1.x/?apikey=40d1649f-0493-4b70-98ba-98533de7710b&geocode={cities.delivery_city}&format=json"
+
+        for_responce, del_responce = requests.get(get_forward_city), requests.get(get_delivery_city)
+
+        for_response_json, del_response_json = for_responce.json(), del_responce.json()
+
+        toponym1 = for_response_json["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]
+        meta_coords1 = toponym1["metaDataProperty"]["GeocoderMetaData"]["text"]
+        coords1 = toponym1["Point"]["pos"]
+
+        toponym2 = del_response_json["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]
+        meta_coords2 = toponym2["metaDataProperty"]["GeocoderMetaData"]["text"]
+        coords2 = toponym2["Point"]["pos"]
+
+        api_server = "http://static-maps.yandex.ru/1.x/"
+
+        lon = str((float(coords1.split(' ')[0]) + float(coords2.split(' ')[0])) / 2)
+        lat = str((float(coords1.split(' ')[1]) + float(coords2.split(' ')[1])) / 2)
+        delta = "10"
+
+        params = {
+            "ll": ",".join([lon, lat]),
+            "spn": ",".join([delta, delta]),
+            "l": "map",
+        }
+        response = requests.get(api_server, params=params)
 
         if not response:
             print("Ошибка выполнения запроса:")
@@ -152,8 +227,12 @@ def track_order():
         map_file = "static/img/map.png"
         with open(map_file, "wb") as file:
             file.write(response.content)
+    else:
+        os.remove("static/img/map.png")
     db_secc.commit()
-    return render_template('track.html', form=form)
+
+    return render_template('track.html', form=form, cities=cities)
+    
 
 
 if __name__ == '__main__':

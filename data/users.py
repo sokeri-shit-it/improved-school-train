@@ -16,6 +16,7 @@ class User(SqlAlchemyBase, UserMixin):
     email = sqlalchemy.Column(sqlalchemy.String,
                               index=True, unique=True, nullable=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+
     created_date = sqlalchemy.Column(sqlalchemy.Date,
                                      default=datetime.date.today())
 
@@ -28,3 +29,24 @@ class User(SqlAlchemyBase, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.hashed_password, password)
+
+
+class Delivery_and_Orders(SqlAlchemyBase, UserMixin):
+    __tablename__ = 'delivery_and_orders'
+
+    id = sqlalchemy.Column(sqlalchemy.Integer,
+                           primary_key=True, autoincrement=True)
+    
+    username = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    email = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+
+    forwarding_city = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    delivery_city = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+
+    order_message = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    forwarding_mail_adress = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    delivery_mail_adress = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    random_order_code = sqlalchemy.Column(sqlalchemy.Integer, unique=True, nullable=True)
+
+    created_date = sqlalchemy.Column(sqlalchemy.Date,
+                                     default=datetime.date.today())
