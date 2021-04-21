@@ -39,7 +39,7 @@ class Delivery_and_Orders(SqlAlchemyBase, UserMixin):
     
     username = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     email = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-
+    
     forwarding_city = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     delivery_city = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 

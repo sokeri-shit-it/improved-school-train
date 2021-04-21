@@ -17,35 +17,20 @@ from form.users import RegisterForm, LoginForm, EditProfileForm, DeliveryForm, T
 
 
 app = Flask(__name__)
-app.config['MAIL_SERVER'] = 'smtp.google.com'
+app.config['DEBUG'] = True
+app.config['TESTING'] = False
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
 app.config['MAIL_USERNAME'] = 'khabexpress@gmail.com'
-app.config['MAIL_DEFAULT_SENDER'] = 'khabexpress@gmail.com'
 app.config['MAIL_PASSWORD'] = 'lolo3322'
+app.config['MAIL_DEFAULT_SENDER'] = 'khabexpress@gmail.com'
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 manager = Manager(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 mail = Mail(app)
-
-
-def shell_context():
-    return dict(app=app, os=os, sys=sys)
-
-manager.add_command('shell', Shell(make_context=shell_context))
-
-
-def async_send_mail(app, message):
-    with app.app_context():
-        mail.send(message)
-
-def send_mail(subject, recipient, template, **kwargs):
-    msg = Message(subject, sender=app.config['MAIL_DEFAULT_SENDER'], recipients=[recipient])
-    msg.html = render_template(template, **kwargs)
-    thr = Thread(target=async_send_mail, args=[app,  msg])
-    thr.start()
-    return thr
 
 
 @login_manager.user_loader
@@ -110,7 +95,7 @@ def login():
     if form.validate_on_submit():
         db_session.global_init('db/user_info.sqlite')
         db_sess = db_session.create_session()
-        user = db_sess.query(User).filter(Delivery_and_Orders.random_order_code == form.random_order_code.data).first()
+        user = db_sess.query(User).filter(User.name == form.name.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=register_form.remember_me.data)
             return redirect("/")
@@ -152,7 +137,6 @@ def edit_profile():
 
 
 @app.route('/delivery', methods=['GET', 'POST'])
-@login_required
 def delivery():
     form = DeliveryForm()
     
@@ -161,6 +145,7 @@ def delivery():
         db_secc = db_session.create_session()
         
         order = Delivery_and_Orders(
+            email=form.email.data,
             username=form.username.data,
             delivery_city=form.delivery_city.data,
             forwarding_city=form.forwarding_city.data,
@@ -170,19 +155,18 @@ def delivery():
             random_order_code=random.randint(1000, 10000)
         )
 
-        message = Message("Subject", recipients=['levbuzunov@mail.ru'])
-        message.body = "Mail body"
-        message.html = "<p> Mail body </p>"
+        message = Message("Hey here!", recipients=[form.email.data])
+        message.body = f'Здравствуйте {form.username.data}! Это ваш персональный код для отслеживания статуса вашего заказа: {order.random_order_code}'
         mail.send(message)
 
         db_secc.add(order)
         db_secc.commit()
+        
         return redirect('/profile')
     return render_template('delivery.html', form=form)
 
 
 @app.route('/track_delivery', methods=['GET', 'POST'], endpoint='track_delivery')
-@login_required
 def track_order():
     form = TrackForm()
     db_session.global_init('db/user_info.sqlite')
@@ -227,8 +211,6 @@ def track_order():
         map_file = "static/img/map.png"
         with open(map_file, "wb") as file:
             file.write(response.content)
-    else:
-        os.remove("static/img/map.png")
     db_secc.commit()
 
     return render_template('track.html', form=form, cities=cities)
