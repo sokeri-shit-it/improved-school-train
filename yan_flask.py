@@ -5,6 +5,8 @@ import requests
 import sqlalchemy
 import smtplib
 
+from pyowm import owm
+from pyowm.owm import OWM
 from data import db_session
 from threading import Thread
 from flask_mail import Mail, Message
@@ -128,6 +130,7 @@ def edit_profile():
         user.hashed_password = generate_password_hash(form.password.data)
         user.email = form.email.data
         db_sess.commit()
+        db_sess._update_impl()
         return redirect('/profile')
     elif request.method == 'GET':
         form.username.data = user.name
@@ -148,20 +151,18 @@ def delivery():
             email=form.email.data,
             username=form.username.data,
             delivery_city=form.delivery_city.data,
-            forwarding_city=form.forwarding_city.data,
-            forwarding_mail_adress=form.forwarding_mail_city.data,
-            delivery_mail_adress=form.delivery_mail_city.data,
+            forwarding_city=form.forwarding_city.data,  
             order_message=form.order_message.data,
             random_order_code=random.randint(1000, 10000)
         )
 
-        message = Message("Hey here!", recipients=[form.email.data])
-        message.body = f'Здравствуйте {form.username.data}! Это ваш персональный код для отслеживания статуса вашего заказа: {order.random_order_code}'
+        message = Message(f"Здравствуйте {form.username.data}!", recipients=[form.email.data])
+        message.html = render_template('mail.html', form=form, order=order)
         mail.send(message)
 
         db_secc.add(order)
         db_secc.commit()
-        
+
         return redirect('/profile')
     return render_template('delivery.html', form=form)
 

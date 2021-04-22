@@ -30,21 +30,18 @@ class EditProfileForm(FlaskForm):
 
 class DeliveryForm(FlaskForm):
     username = StringField('ФИО:', validators=[DataRequired()])
-    email = StringField('Ваша почта (для отправки кода для отслеживания статуса заказа):')
+    email = StringField('Ваша почта (для отправки кода):')
 
     delivery_city = StringField('Город отправки:', validators=[DataRequired()])
     forwarding_city = StringField('Город доставки:', validators=[DataRequired()])
-
-    forwarding_mail_city = IntegerField('Почтовый индекс (города отправки):', validators=[DataRequired()])
-    delivery_mail_city = IntegerField('Почтовый индекс (города отправки):', validators=[DataRequired()])
     
-    order_message = StringField('Сообщение к заказу:', validators=[DataRequired()])
+    order_message = StringField('Примечание к заказу:', validators=[DataRequired()])
 
     submit = SubmitField('Сделать заказ')
 
 
 class TrackForm(FlaskForm):
-    random_order_code = IntegerField('Введите код для отслеживания:')
+    random_order_code = IntegerField('Введите код:')
 
     submit = SubmitField('Получить данные')
      

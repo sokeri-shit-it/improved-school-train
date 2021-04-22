@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block head %}
-<form class="register_form" action="" method="post"><br>
-    <h1>Создать заказ</h1><br>
+<form class="container" action="" method="post"><br>
+    <h1 class="text-light text-center bg-primary rounded p-3 shadow-lg mr-5 ml-5">Создать заказ</h1><br>
     {{ form.hidden_tag() }}
     <p>
         {{ form.username.label }}<br>
@@ -39,24 +39,6 @@
         {{ form.forwarding_city.label }}<br>
         {{ form.forwarding_city(class="form-control") }}<br>
         {% for error in form.forwarding_city.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.forwarding_mail_city.label }}<br>
-        {{ form.forwarding_mail_city(class="form-control") }}<br>
-        {% for error in form.forwarding_mail_city.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.delivery_mail_city.label }}<br>
-        {{ form.delivery_mail_city(class="form-control") }}<br>
-        {% for error in form.delivery_mail_city.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>

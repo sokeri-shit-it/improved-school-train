@@ -41,21 +41,20 @@
 					</a>
 				</form>
 			</nav>
-			{% if current_user.is_authenticated %}
-				<nav class="navbar navbar-white bg-primary">
-					<form class="form-inline">
-						<div class="btn-group">
-							<button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-								Сделать заказ
-							</button>
-							<ul class="dropdown-menu dropdown-menu-end">
-							<li><a class="dropdown-item" href="/delivery">Сделать заказ</a></li>
-							<li><a class="dropdown-item" href="/track_delivery">Отследить заказ</a></li>
-							</ul>
-						</div>
-					</form>
-				</nav>
-			{% endif %}
+			<nav class="navbar navbar-white bg-primary">
+				<form class="form-inline">
+					<div class="btn-group">
+						{% if current_user.is_authenticated %}
+							<div class="btn-group" role="group" aria-label="Basic example">
+								<a href="/delivery"><button type="button" class="btn btn-outline-light">Сделать заказ</button></a>
+								<a href="/track_delivery"><button type="button" class="btn btn-outline-light">Отследить заказ</button></a>
+							</div>
+						{% else %}
+							<a href="/track_delivery"><button type="button" class="btn btn-outline-light"> Отследить заказ по коду </button></a>
+						{% endif %}
+					</div>
+				</form>
+			</nav>
 			{% if current_user.is_authenticated %}
 				<nav class="navbar navbar-white bg-primary">
 					<form class="form-inline">
@@ -103,11 +102,11 @@
 		</div>
 
 		<div class="profile_content">
-			<h2>История заказов</h2>
+			<h1>История заказов</h1>
 			<!-- Здесь будет код для поля ввода номера заказа -->
 			<p>
 				В данное поле вы можете ввести номер своего заказа, чтобы посмотреть где находиться ваш товар, а также его статус (в пути, заказ прибыл в пункт выдачи и т.д.)
-			</p><br>
+			</p><hr><br>
 			<br><hr><br>
 			<h2>Ваш купон на скидку при получении</h2>
 			<p>Код купона будет меняться после того как вы его применили</p>

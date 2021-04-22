@@ -44,8 +44,6 @@ class Delivery_and_Orders(SqlAlchemyBase, UserMixin):
     delivery_city = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
     order_message = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    forwarding_mail_adress = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    delivery_mail_adress = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     random_order_code = sqlalchemy.Column(sqlalchemy.Integer, unique=True, nullable=True)
 
     created_date = sqlalchemy.Column(sqlalchemy.Date,
