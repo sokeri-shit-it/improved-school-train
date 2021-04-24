@@ -5,8 +5,6 @@ import requests
 import sqlalchemy
 import smtplib
 
-from pyowm import owm
-from pyowm.owm import OWM
 from data import db_session
 from threading import Thread
 from flask_mail import Mail, Message
