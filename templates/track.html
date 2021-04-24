@@ -103,34 +103,42 @@
         <form class="container" action="" method="post"><br><br>
             <h1 class="text-light text-center bg-primary rounded p-3 shadow-lg mr-5 ml-5">Отследить заказ</h1><br><hr>
             {{ form.hidden_tag() }}
-            <div class="float-center">
+            <div class="register_form">
                 <p>
                     <h2>{{ form.random_order_code.label }}</h2><br>
-                    {{ form.random_order_code(class="form-control") }}<br>
+                    {{ form.random_order_code(class="form-control") }}
                     {% for error in form.random_order_code.errors %}
                         <p class="alert alert-danger" role="alert">
                             Пожалуйста введите правильный код!
                         </p>
+                    </div>
                     {% endfor %}<br>
                     {% if form.validate_on_submit() %}
-                    <div class="container">
-                        <img class="float-left rounded shadow-lg mr-5" src="static/img/map.png" alt="" width="600", height="500"><br><br>
-                        <div class="float-right">
-                            <h3> Статус: <p style='color: green'> В пути </p> </h3> <br>
-                            <h3> Город отправки: {{ cities.delivery_city }} </h3> <br>
-                            <h3> Город доставки: {{ cities.forwarding_city }} </h3>
-                        </div>
-                    </div>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                        {% if cities %}
+                            <div class="container">
+                                <img class="float-left rounded shadow-lg mr-5" src="static/img/map.png" alt="" width="550", height="500"><br><br>
+                                <div class="float-right">
+                                    <h3> Статус: <p style='color: green'> В пути </p> </h3> <br>
+                                    <h3> Город отправки: {{ cities.delivery_city }} </h3> <br>
+                                    <h3> Город доставки: {{ cities.forwarding_city }} </h3>
+                                </div>
+                            </div>
+                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                        {% else %}
+                            <p class="alert alert-danger" role="alert">
+                                Такого кода не существует! Пожалуйста введите правильный код!
+                            </p><br>
+                            <p>{{ form.submit(type="submit", class="btn btn-success btn-lg") }}</p>
+                        {% endif %}
                     {% endif %}
                 </p>        
                 {% if not form.validate_on_submit() %}
-                    <p>{{ form.submit(type="submit", class="btn btn-success") }}</p>
+                    <p>{{ form.submit(type="submit", class="btn btn-success btn-lg") }}</p>
                 {% endif %}
                 {{message}}
-            </div>
         </form>
     </main>
-
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+	<script src="static/js/style.js"></script>
 </body>
 </html>

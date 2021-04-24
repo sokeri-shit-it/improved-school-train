@@ -10,6 +10,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 	<link rel="shortcut icon" href="static/img/only_logo.png" type="image/png">
 	<link rel="stylesheet" type="text/css" href="static/css/custom.css">
+	<title> Профиль {{ current_user.name }} </title>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-primary bg-primary border-bottom border-primary">
@@ -93,26 +94,33 @@
 			</div>
 		   {% endif %}
 	</nav>
-	<div class="all_content">
 		<div class="user_avatar">
 			<img class="avatar_img" src="static/img/default_avatar.png">
 			<p class="avatar_text">{{ current_user.name }}</p>
 			<p class="text-secondary"> {{ current_user.email }} </p>			
-			<a href="settings"><button type="button" class="btn btn-light avatar_button"> Изменить профиль </button></a>
+			<a href="/settings"><button type="button" class="btn btn-success avatar_button"> Изменить профиль </button></a>
 		</div>
 
 		<div class="profile_content">
-			<h1>История заказов</h1>
-			<!-- Здесь будет код для поля ввода номера заказа -->
+			<h1 class="text-light text-center bg-primary rounded p-3 shadow-lg mr-5 ml-5">История заказов</h1><br>
 			<p>
 				В данное поле вы можете ввести номер своего заказа, чтобы посмотреть где находиться ваш товар, а также его статус (в пути, заказ прибыл в пункт выдачи и т.д.)
 			</p><hr><br>
+			{% for info in order_id %}
+				<div class="card">
+					<div class="card-header bg-primary text-white">
+						<b>Заказ {{ info.id }} </b>
+					</div>
+					<div class="card-body shadow">
+						<blockquote class="blockquote">
+							<p class="float-left">Город отправки: {{ info.forwarding_city }}</p>
+							<p class="float-right"> Город доставки: {{ info.delivery_city }} </p>
+						</blockquote>
+					</div>
+				</div><br>
+			{% endfor %}
 			<br><hr><br>
-			<h2>Ваш купон на скидку при получении</h2>
-			<p>Код купона будет меняться после того как вы его применили</p>
-			<!-- Дальше будет фото купона или что то в этом роде -->
 		</div>
-	</div>
 	<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 	<script src="static/js/style.js"></script>
 	

@@ -36,6 +36,8 @@ class Delivery_and_Orders(SqlAlchemyBase, UserMixin):
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
+            
+    # name = sqlalchemy.Column(sqlalchemy.String, sqlalchemy.ForeignKey('users.name'))
     
     username = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     email = sqlalchemy.Column(sqlalchemy.String, nullable=True)

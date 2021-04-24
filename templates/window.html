@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+	<link rel="shortcut icon" href="static/img/only_logo.png" type="image/png">
+	<link rel="stylesheet" type="text/css" href="static/css/custom.css">
+    <title>Уведомление от KHAB EXPRESS</title>
+</head>
+<body>
+    <main class="container"><br>
+        <img class="shadow rounded mx-auto d-block" src="static/img/logo_1.png" alt="Логотип сайта" width="19%"> <br>
+        <h1 class="text-center"> Спасибо {{ form.username.data }} что выбрали KHAB EXPRESS </h1>
+        <h3> Мы направили вам код для отслеживания заказа на почту {{ form.email.data }} </h3><br><br>
+        <a href="/"><button type="button" class="btn btn-success btn-lg mx-auto d-block"> Вернуться на главную </button></a>
+    </main>
+</body>
+</html>
+    

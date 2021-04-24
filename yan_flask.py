@@ -112,7 +112,10 @@ def login():
 @app.route('/profile')
 @login_required
 def account():
-    return render_template('account.html')
+    db_session.global_init('db/user_info.sqlite')
+    db_secc = db_session.create_session()
+    order_id = db_secc.query(Delivery_and_Orders).all()
+    return render_template('account.html', order_id=order_id)
 
 
 @app.route('/settings', methods=['GET', 'POST'])
@@ -130,7 +133,6 @@ def edit_profile():
         user.hashed_password = generate_password_hash(form.password.data)
         user.email = form.email.data
         db_sess.commit()
-        db_sess._update_impl()
         return redirect('/profile')
     elif request.method == 'GET':
         form.username.data = user.name
@@ -150,6 +152,7 @@ def delivery():
         order = Delivery_and_Orders(
             email=form.email.data,
             username=form.username.data,
+            # name=User.name,
             delivery_city=form.delivery_city.data,
             forwarding_city=form.forwarding_city.data,  
             order_message=form.order_message.data,
@@ -163,7 +166,7 @@ def delivery():
         db_secc.add(order)
         db_secc.commit()
 
-        return redirect('/profile')
+        return render_template('window.html', form=form)
     return render_template('delivery.html', form=form)
 
 
@@ -174,44 +177,45 @@ def track_order():
     db_secc = db_session.create_session()
     cities = db_secc.query(Delivery_and_Orders).filter(Delivery_and_Orders.random_order_code == form.random_order_code.data).first()
     if form.validate_on_submit():
-        os.environ['no_proxy'] = '127.0.0.1,localhost'
-        get_forward_city = f"https://geocode-maps.yandex.ru/1.x/?apikey=40d1649f-0493-4b70-98ba-98533de7710b&geocode={cities.forwarding_city}&format=json"
-        get_delivery_city = f"https://geocode-maps.yandex.ru/1.x/?apikey=40d1649f-0493-4b70-98ba-98533de7710b&geocode={cities.delivery_city}&format=json"
+        if cities:
+            os.environ['no_proxy'] = '127.0.0.1,localhost'
+            get_forward_city = f"https://geocode-maps.yandex.ru/1.x/?apikey=40d1649f-0493-4b70-98ba-98533de7710b&geocode={cities.forwarding_city}&format=json"
+            get_delivery_city = f"https://geocode-maps.yandex.ru/1.x/?apikey=40d1649f-0493-4b70-98ba-98533de7710b&geocode={cities.delivery_city}&format=json"
 
-        for_responce, del_responce = requests.get(get_forward_city), requests.get(get_delivery_city)
+            for_responce, del_responce = requests.get(get_forward_city), requests.get(get_delivery_city)
 
-        for_response_json, del_response_json = for_responce.json(), del_responce.json()
+            for_response_json, del_response_json = for_responce.json(), del_responce.json()
 
-        toponym1 = for_response_json["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]
-        meta_coords1 = toponym1["metaDataProperty"]["GeocoderMetaData"]["text"]
-        coords1 = toponym1["Point"]["pos"]
+            toponym1 = for_response_json["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]
+            meta_coords1 = toponym1["metaDataProperty"]["GeocoderMetaData"]["text"]
+            coords1 = toponym1["Point"]["pos"]
 
-        toponym2 = del_response_json["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]
-        meta_coords2 = toponym2["metaDataProperty"]["GeocoderMetaData"]["text"]
-        coords2 = toponym2["Point"]["pos"]
+            toponym2 = del_response_json["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]
+            meta_coords2 = toponym2["metaDataProperty"]["GeocoderMetaData"]["text"]
+            coords2 = toponym2["Point"]["pos"]
 
-        api_server = "http://static-maps.yandex.ru/1.x/"
+            api_server = "http://static-maps.yandex.ru/1.x/"
 
-        lon = str((float(coords1.split(' ')[0]) + float(coords2.split(' ')[0])) / 2)
-        lat = str((float(coords1.split(' ')[1]) + float(coords2.split(' ')[1])) / 2)
-        delta = "10"
+            lon = str((float(coords1.split(' ')[0]) + float(coords2.split(' ')[0])) / 2)
+            lat = str((float(coords1.split(' ')[1]) + float(coords2.split(' ')[1])) / 2)
+            delta = "10"
 
-        params = {
-            "ll": ",".join([lon, lat]),
-            "spn": ",".join([delta, delta]),
-            "l": "map",
-        }
-        response = requests.get(api_server, params=params)
+            params = {
+                "ll": ",".join([lon, lat]),
+                "spn": ",".join([delta, delta]),
+                "l": "map",
+            }
+            response = requests.get(api_server, params=params)
 
-        if not response:
-            print("Ошибка выполнения запроса:")
-            print(map_request)
-            print("Http статус:", response.status_code, "(", response.reason, ")")
-            sys.exit(1)
+            if not response:
+                print("Ошибка выполнения запроса:")
+                print(map_request)
+                print("Http статус:", response.status_code, "(", response.reason, ")")
+                sys.exit(1)
 
-        map_file = "static/img/map.png"
-        with open(map_file, "wb") as file:
-            file.write(response.content)
+            map_file = "static/img/map.png"
+            with open(map_file, "wb") as file:
+                file.write(response.content)
     db_secc.commit()
 
     return render_template('track.html', form=form, cities=cities)
