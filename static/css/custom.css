@@ -1,0 +1,44 @@
+body {
+	background: F0F8FF;
+}
+
+img.avatar_img {
+	border-radius: 100%;
+	height: 278px;
+	width: 278px;
+	margin-bottom: 20px;
+}
+
+div.user_avatar {
+	float: left;
+	margin-left: 200px;
+	margin-top: 70px;
+	max-width: 400px;
+}
+
+button.avatar_button {
+	width: 278px;
+	padding: 5px;
+	height: 35px;
+}
+
+p.avatar_text {
+	font-size: 25px;
+	font-weight: bold;
+	background: #FFFFFF;
+}
+
+div.profile_content {
+	margin-right: 100px;
+	max-width: 58%;
+	float: right;
+	margin-top: 70px;
+}
+
+form.register_form {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 700px;
+	max-height: 800px;
+}
+

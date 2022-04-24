@@ -1,0 +1,5 @@
+.idea
+env
+.vscode
+__pycache__
+test11.py

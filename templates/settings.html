@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Изменение личных данных
+{% endblock %}
+
+{% block content %}
+<br>
+<form class="register_form" action="" method="post">
+    <h1 class="text-light text-center bg-primary rounded p-3 shadow-lg mr-5 ml-5"> Изменить профиль </h1><br>
+    {{ form.hidden_tag() }}
+    <p>
+        <h5>{{ form.username.label }} </h5>
+        {{ form.username(class="form-control") }}<br>
+        {% for error in form.username.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        <h5> {{ form.email.label }} </h5>
+        {{ form.email(class="form-control", type="email") }}<br>
+        {% for error in form.email.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        <h5> {{ form.password.label }} </h5>
+        {{ form.password(class="form-control", type="password") }}<br>
+        {% for error in form.password.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor%}
+    </p>
+        <p>
+        <h5> {{ form.city.label }} </h5>
+        {{ form.city(class="form-control") }}<br>
+        {% for error in form.city.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", class="btn btn-success") }}</p>
+    {{message}}
+</form>
+{% endblock %}

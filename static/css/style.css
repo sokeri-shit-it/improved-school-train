@@ -1,0 +1,24 @@
+form.login_form {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    max-height: 400px;
+    background-color: #E6E6FA;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+h1.custom_form {
+	text-align: center;
+	font-size: 23px;
+}
+
+div.transition-fade {
+	transition: .4s;
+	opacity: 1;
+}
+
+html.is-animating .transition-fade{
+	opacity: 0;
+}

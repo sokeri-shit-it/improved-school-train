@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Создать заказ
+{% endblock %}
+
+{% block head %}
+<form class="register_form" action="" method="post"><br>
+    <h1 class="text-light text-center bg-primary rounded p-3 shadow-lg mr-5 ml-5">Создать заказ</h1><br>
+    {{ form.hidden_tag() }}
+    <p>
+        <h5>{{ form.username.label }}</h5>
+        {{ form.username(class="form-control") }}<br>
+        {% for error in form.username.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        <h5> {{ form.email.label }} </h5>
+        {{ form.email(class="form-control") }}<br>
+        {% for error in form.email.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        <h5> {{ form.delivery_city.label }} </h5>
+        {{ form.delivery_city(class="form-control") }}<br>
+        {% for error in form.delivery_city.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor    %}
+    </p>
+    <p>
+        <h5> {{ form.forwarding_city.label }} </h5>
+        {{ form.forwarding_city(class="form-control") }}<br>
+        {% for error in form.forwarding_city.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        <h5> {{ form.order_message.label }} </h5>
+        {{ form.order_message(class="form-control") }}<br>
+        {% for error in form.order_message.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", class="btn btn-success btn-lg") }}</p><br>
+    {{message}}
+</form>
+
+{% endblock %}
